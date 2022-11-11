@@ -1,0 +1,182 @@
+$num: 0; //循环计数器
+$sum: 30; //循环次数，用于控制生成calss的梳理
+$step: 2; //步长，由于设计稿2rpx=1px，故此处步长为2
+$pixis: "rpx"; //单位
+//颜色数组，可拓展，下方2个数组长度必须一致
+$color_name_list: "blue", "green", "yellow", "red", "gray";
+$color_list: #007aff, #4cd964, #f0ad4e, #dd524d, #636e72;
+
+//尺寸数组
+$size_name_list: "xs", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl", "5xl";
+$text_size_lset: 12, 13, 14, 16, 18, 24, 36, 48, 56;//圆角
+$rounded_size_lset: 5, 8, 10, 12, 16, 24, 36, 48, 56;//字体大小
+
+@while $num < ($sum + 1) {
+    //margin
+    .m-#{$num} {
+        margin: #{$num * $step} + #{$pixis};
+    }
+    .mx-#{$num} {
+        margin-left: #{$num * $step} + #{$pixis};
+        margin-right: #{$num * $step} + #{$pixis};
+    }
+    .my-#{$num} {
+        margin-top: #{$num * $step} + #{$pixis};
+        margin-bottom: #{$num * $step} + #{$pixis};
+    }
+    .ml-#{$num} {
+        margin-left: #{$num * $step} + #{$pixis};
+    }
+    .mt-#{$num} {
+        margin-top: #{$num * $step} + #{$pixis};
+    }
+    .mr-#{$num} {
+        margin-right: #{$num * $step} + #{$pixis};
+    }
+    .mb-#{$num} {
+        margin-bottom: #{$num * $step} + #{$pixis};
+    }
+    //padding
+    .p-#{$num} {
+        padding: #{$num * $step} + #{$pixis};
+    }
+    .px-#{$num} {
+        padding-left: #{$num * $step} + #{$pixis};
+        padding-right: #{$num * $step} + #{$pixis};
+    }
+    .py-#{$num} {
+        padding-top: #{$num * $step} + #{$pixis};
+        padding-bottom: #{$num * $step} + #{$pixis};
+    }
+    .pl-#{$num} {
+        padding-left: #{$num * $step} + #{$pixis};
+    }
+    .pt-#{$num} {
+        padding-top: #{$num * $step} + #{$pixis};
+    }
+    .pr-#{$num} {
+        padding-right: #{$num * $step} + #{$pixis};
+    }
+    .pb-#{$num} {
+        padding-bottom: #{$num * $step} + #{$pixis};
+    }
+    // border
+    .border-#{$num} {
+        border-style: solid;
+        border-width: #{$num * $step} + #{$pixis};
+    }
+    .border-r-#{$num} {
+        border-style: solid;
+        border-right-width: #{$num * $step} + #{$pixis};
+    }
+    .border-t-#{$num} {
+        border-style: solid;
+        border-top-width: #{$num * $step} + #{$pixis};
+    }
+    .border-l-#{$num} {
+        border-style: solid;
+        border-left-width: #{$num * $step} + #{$pixis};
+    }
+    .border-b-#{$num} {
+        border-style: solid;
+        border-bottom-width: #{$num * $step} + #{$pixis};
+    }
+
+    //width
+    .w-#{$num } {
+        width: #{$num * $step} + #{$pixis};
+    }
+    .w-#{$num * 10} {
+        width: #{$num * $step * 10} + #{$pixis};
+    }
+    //height
+    .h-#{$num } {
+        height: #{$num * $step} + #{$pixis};
+    }
+    .h-#{$num * 10} {
+        height: #{$num * $step * 10} + #{$pixis};
+    }
+    // line-height
+    .leading-#{$num} {
+        line-height: #{$num * $step} + #{$pixis};
+    }
+    //定位相关
+    .t-#{$num} {
+        top: #{$num * $step} + #{$pixis};
+    }
+    .r-#{$num} {
+        right: #{$num * $step} + #{$pixis};
+    }
+    .b-#{$num} {
+        bottom: #{$num * $step} + #{$pixis};
+    }
+    .l-#{$num} {
+        left: #{$num * $step} + #{$pixis};
+    }
+    $num: $num + 1;
+}
+
+//百分比 高度、宽度拓展
+@for $precentage from 1 through 10 {
+    .w-p-#{$precentage * 10} {
+        width: #{$precentage * 10} + "%";
+    }
+    .h-p-#{$precentage * 10} {
+        height: #{$precentage * 10} + "%";
+    }
+}
+
+// 颜色
+@each $color in $color_list {
+    $i: index($color_list, $color);
+    $name: nth(
+        $list: $color_name_list,
+        $n: $i,
+    );
+    $color_num: 0;
+    @while $color_num<10 {
+        $transparency: 1 - ($color_num * 0.1);
+        @if $color_num == 0 {
+            .bg-#{$name} {
+                background-color: rgba($color: $color, $alpha: 1);
+            }
+            .text-#{$name} {
+                color: rgba($color: $color, $alpha: 1);
+            }
+            .border-#{$name} {
+                border-color: rgba($color: $color, $alpha: 1);
+            }
+        } @else {
+            .bg-#{$name}-#{$color_num} {
+                background-color: rgba($color: $color, $alpha: $transparency);
+            }
+            .text-#{$name}-#{$color_num} {
+                color: rgba($color: $color, $alpha: $transparency);
+            }
+            .border-#{$name}-#{$color_num} {
+                border-color: rgba($color: $color, $alpha: $transparency);
+            }
+        }
+
+        $color_num: $color_num + 1;
+    }
+}
+
+// 字体、边框圆角
+@each $size in $size_name_list {
+    $i: index($size_name_list, $size); //索引
+    $text_size: nth(
+        $list: $text_size_lset,
+        $n: $i,
+    );
+    $rounded_size: nth(
+        $list: $rounded_size_lset,
+        $n: $i,
+    );
+    .text-#{$size} {
+        font-size: #{$text_size * $step} + #{$pixis};
+    }
+    .rounded-#{$size} {
+        border-radius: #{$rounded_size * $step} + #{$pixis};
+    }
+}
