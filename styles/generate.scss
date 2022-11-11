@@ -1,5 +1,5 @@
 $num: 0; //循环计数器
-$sum: 30; //循环次数，用于控制生成calss的梳理
+$sum: 30; //循环次数，用于控制生成calss的数量
 $step: 2; //步长，由于设计稿2rpx=1px，故此处步长为2
 $pixis: "rpx"; //单位
 //颜色数组，可拓展，下方2个数组长度必须一致
@@ -8,8 +8,8 @@ $color_list: #007aff, #4cd964, #f0ad4e, #dd524d, #636e72;
 
 //尺寸数组
 $size_name_list: "xs", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl", "5xl";
-$text_size_lset: 12, 13, 14, 16, 18, 24, 36, 48, 56;//圆角
-$rounded_size_lset: 5, 8, 10, 12, 16, 24, 36, 48, 56;//字体大小
+$text_size_list: 12, 13, 14, 16, 18, 24, 36, 48, 56;//圆角
+$rounded_size_list: 5, 8, 10, 12, 16, 24, 36, 48, 56;//字体大小
 
 @while $num < ($sum + 1) {
     //margin
@@ -166,11 +166,11 @@ $rounded_size_lset: 5, 8, 10, 12, 16, 24, 36, 48, 56;//字体大小
 @each $size in $size_name_list {
     $i: index($size_name_list, $size); //索引
     $text_size: nth(
-        $list: $text_size_lset,
+        $list: $text_size_list,
         $n: $i,
     );
     $rounded_size: nth(
-        $list: $rounded_size_lset,
+        $list: $rounded_size_list,
         $n: $i,
     );
     .text-#{$size} {
